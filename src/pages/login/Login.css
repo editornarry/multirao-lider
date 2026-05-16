@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700&family=Barlow+Condensed:wght@700;900&display=swap');
+
+/* ── ROOT ── */
+.login-root {
+  min-height: 100vh;
+  background: #050a14;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Barlow', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── PARTÍCULAS ── */
+.login-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #2366d1;
+  opacity: 0;
+  left: calc(var(--i) * 5.2%);
+  top: 110%;
+  animation: floatUp calc(6s + var(--i) * 0.4s) calc(var(--i) * 0.3s) infinite ease-in-out;
+}
+
+.particle:nth-child(even) {
+  background: #f4a261;
+  width: 3px;
+  height: 3px;
+}
+
+@keyframes floatUp {
+  0%   { top: 110%; opacity: 0; transform: translateX(0); }
+  10%  { opacity: 0.6; }
+  50%  { transform: translateX(30px); }
+  90%  { opacity: 0.2; }
+  100% { top: -5%; opacity: 0; transform: translateX(-20px); }
+}
+
+/* Fundo gradiente animado */
+.login-root::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(35, 102, 209, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 70%, rgba(230, 57, 70, 0.08) 0%, transparent 60%);
+  animation: bgPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes bgPulse {
+  from { opacity: 0.6; }
+  to   { opacity: 1; }
+}
+
+/* ── CONTAINER ── */
+.login-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 480px;
+  padding: 40px 36px 32px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(35, 102, 209, 0.2);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow:
+    0 0 0 1px rgba(35,102,209,0.1),
+    0 40px 80px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* ── LOGO ── */
+.login-logo-wrap {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.login-logo {
+  width: 90px;
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(35, 102, 209, 0.5));
+  animation: logoPulse 3s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+  0%, 100% { filter: drop-shadow(0 0 20px rgba(35, 102, 209, 0.5)); }
+  50%       { filter: drop-shadow(0 0 35px rgba(35, 102, 209, 0.9)); }
+}
+
+.login-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  color: #fff;
+  letter-spacing: 0.12em;
+  margin: 12px 0 4px;
+  line-height: 1;
+}
+
+.login-subtitle {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #f4a261;
+  letter-spacing: 0.2em;
+  text-shadow: 0 0 20px rgba(244, 162, 97, 0.6);
+  animation: sextouGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes sextouGlow {
+  from { text-shadow: 0 0 10px rgba(244, 162, 97, 0.4); }
+  to   { text-shadow: 0 0 30px rgba(244, 162, 97, 0.9), 0 0 60px rgba(244, 162, 97, 0.3); }
+}
+
+/* ── SELEÇÃO DE MODO ── */
+.login-modos-label {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.login-modos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.modo-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 8px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: rgba(255,255,255,0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.modo-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--destaque);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.modo-btn:hover {
+  border-color: var(--destaque);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.modo-btn:hover::before { opacity: 0.08; }
+
+.modo-btn--ativo {
+  border-color: var(--destaque) !important;
+  color: #fff !important;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3), inset 0 0 0 1px var(--destaque);
+}
+
+.modo-btn--ativo::before { opacity: 0.12 !important; }
+
+.modo-icon {
+  font-size: 1.6rem;
+  position: relative;
+  z-index: 1;
+}
+
+.modo-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  position: relative;
+  z-index: 1;
+}
+
+.modo-desc {
+  font-size: 0.62rem;
+  opacity: 0.6;
+  text-align: center;
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── FORMULÁRIO ── */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.login-field label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.5);
+  font-weight: 600;
+}
+
+.login-field input {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-family: 'Barlow', sans-serif;
+  transition: border-color 0.2s, background 0.2s;
+  outline: none;
+}
+
+.login-field input::placeholder { color: rgba(255,255,255,0.2); }
+
+.login-field input:focus {
+  border-color: #2366d1;
+  background: rgba(35, 102, 209, 0.08);
+}
+
+/* ── ERRO ── */
+.login-erro {
+  background: rgba(230, 57, 70, 0.15);
+  border: 1px solid rgba(230, 57, 70, 0.4);
+  color: #ff6b7a;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* ── BOTÃO ENTRAR ── */
+.login-btn-entrar {
+  background: var(--destaque, #2366d1);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.login-btn-entrar:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  filter: brightness(1.1);
+}
+
+.login-btn-entrar:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── SPINNER ── */
+.login-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── COPYRIGHT ── */
+.login-copyright {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.65rem;
+  animation: rgbShift 6s linear infinite;
+}
+
+@keyframes rgbShift {
+  0%   { color: rgba(100, 149, 237, 0.5); }
+  25%  { color: rgba(147, 112, 219, 0.5); }
+  50%  { color: rgba(100, 200, 180, 0.5); }
+  75%  { color: rgba(147, 112, 219, 0.5); }
+  100% { color: rgba(100, 149, 237, 0.5); }
+}
+
+/* ── RESPONSIVO ── */
+@media (max-width: 480px) {
+  .login-container { margin: 16px; padding: 28px 20px 24px; }
+  .login-title { font-size: 1.2rem; }
+  .modo-label { font-size: 0.75rem; }
+  .modo-desc { display: none; }
+}

@@ -1,0 +1,61 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Verifica se é admin
+    function isAdmin() {
+      return request.auth != null &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // Verifica se é o próprio usuário
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    // ── USERS ──
+    match /users/{uid} {
+      allow read: if request.auth != null;
+      allow create: if isAdmin();
+      allow update: if isAdmin() || isOwner(uid);
+      allow delete: if isAdmin();
+    }
+
+    // ── EVENTOS ──
+    match /eventos/{eventoId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // ── VENDAS ──
+    match /vendas/{vendaId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null &&
+        request.resource.data.corretorId == request.auth.uid;
+      allow update, delete: if isAdmin();
+    }
+
+    // ── DUELOS ──
+    match /duelos/{dueloId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null; // corretor ou admin podem criar
+      allow update: if isAdmin(); // só admin aprova/recusa/encerra
+      allow delete: if isAdmin();
+    }
+
+    // ── MENSAGENS DE PROVOCAÇÃO ──
+    match /mensagens/{msgId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update, delete: if isAdmin();
+    }
+
+    // ── NOTIFICAÇÕES ──
+    match /notificacoes/{uid}/itens/{itemId} {
+      allow read: if isOwner(uid) || isAdmin();
+      allow create: if isAdmin() || request.auth != null;
+      allow update: if isOwner(uid); // marcar como lida
+      allow delete: if isAdmin();
+    }
+  }
+}

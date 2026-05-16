@@ -1,0 +1,710 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700;900&display=swap');
+
+:root {
+  --azul: #2366d1;
+  --azul-claro: #4a8af4;
+  --vermelho: #e63946;
+  --laranja: #f4a261;
+  --verde: #2dc653;
+  --amarelo: #ffd60a;
+  --bg: #f0f4ff;
+  --bg2: #e8edf8;
+  --card: #ffffff;
+  --texto: #0d1b2a;
+  --texto2: #4a5568;
+  --borda: #d1daea;
+  --sombra: 0 2px 12px rgba(35,102,209,0.10);
+  --sombra-hover: 0 8px 32px rgba(35,102,209,0.18);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.admin-root {
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: 'Barlow', sans-serif;
+  color: var(--texto);
+  display: flex;
+}
+
+/* ── SIDEBAR ── */
+.admin-sidebar {
+  width: 240px;
+  min-height: 100vh;
+  background: #fff;
+  border-right: 1px solid var(--borda);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  z-index: 100;
+  box-shadow: 2px 0 16px rgba(35,102,209,0.07);
+}
+
+.admin-sidebar-logo {
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--borda);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-sidebar-logo img {
+  width: 40px;
+  height: auto;
+}
+
+.admin-sidebar-logo-text h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  color: var(--azul);
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.admin-sidebar-logo-text span {
+  font-size: 0.65rem;
+  color: var(--laranja);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.admin-nav {
+  flex: 1;
+  padding: 12px 0;
+  overflow-y: auto;
+}
+
+.admin-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 20px;
+  cursor: pointer;
+  color: var(--texto2);
+  font-weight: 600;
+  font-size: 0.88rem;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  transition: all 0.15s;
+  border-left: 3px solid transparent;
+  letter-spacing: 0.02em;
+}
+
+.admin-nav-item:hover {
+  background: var(--bg);
+  color: var(--azul);
+}
+
+.admin-nav-item.ativo {
+  background: #eef3ff;
+  color: var(--azul);
+  border-left-color: var(--azul);
+}
+
+.admin-nav-item .nav-icon { font-size: 1.1rem; }
+
+.admin-nav-badge {
+  margin-left: auto;
+  background: var(--vermelho);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.admin-sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid var(--borda);
+}
+
+.admin-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.admin-user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--azul);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.admin-user-nome {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--texto);
+}
+
+.admin-user-role {
+  font-size: 0.7rem;
+  color: var(--azul);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.admin-btn-sair {
+  width: 100%;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  color: var(--texto2);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.admin-btn-sair:hover {
+  background: #fff0f0;
+  border-color: var(--vermelho);
+  color: var(--vermelho);
+}
+
+/* ── MAIN ── */
+.admin-main {
+  margin-left: 240px;
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-topbar {
+  background: #fff;
+  border-bottom: 1px solid var(--borda);
+  padding: 0 32px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.admin-topbar-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--texto);
+  letter-spacing: 0.03em;
+}
+
+.admin-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-evento-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.admin-evento-badge.ativo {
+  background: #e8f8ee;
+  color: var(--verde);
+  border: 1px solid #b8edc8;
+}
+
+.admin-evento-badge.inativo {
+  background: #f8e8e8;
+  color: var(--vermelho);
+  border: 1px solid #edb8b8;
+}
+
+.admin-evento-badge .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.admin-content {
+  padding: 28px 32px;
+  flex: 1;
+}
+
+/* ── CARDS ── */
+.admin-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.admin-card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: var(--sombra);
+  border: 1px solid var(--borda);
+  transition: box-shadow 0.2s;
+}
+
+.admin-card:hover { box-shadow: var(--sombra-hover); }
+
+.admin-card-icon {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.admin-card-valor {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: var(--azul);
+  line-height: 1;
+  letter-spacing: 0.03em;
+}
+
+.admin-card-label {
+  font-size: 0.75rem;
+  color: var(--texto2);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+
+/* ── SEÇÃO ── */
+.admin-secao {
+  background: var(--card);
+  border-radius: 14px;
+  border: 1px solid var(--borda);
+  box-shadow: var(--sombra);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.admin-secao-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--borda);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fafbff;
+}
+
+.admin-secao-titulo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--texto);
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-secao-body { padding: 20px; }
+
+/* ── BOTÕES ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+  font-family: 'Barlow', sans-serif;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-primary { background: var(--azul); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: #1a52b8; box-shadow: 0 4px 12px rgba(35,102,209,0.3); }
+
+.btn-success { background: var(--verde); color: #fff; }
+.btn-success:hover:not(:disabled) { background: #22a845; }
+
+.btn-danger { background: var(--vermelho); color: #fff; }
+.btn-danger:hover:not(:disabled) { background: #c1232f; }
+
+.btn-warning { background: var(--laranja); color: #fff; }
+.btn-warning:hover:not(:disabled) { background: #e08830; }
+
+.btn-ghost { background: transparent; color: var(--texto2); border: 1px solid var(--borda); }
+.btn-ghost:hover:not(:disabled) { background: var(--bg); color: var(--texto); }
+
+.btn-sm { padding: 5px 10px; font-size: 0.75rem; }
+.btn-lg { padding: 12px 24px; font-size: 0.95rem; }
+
+/* ── TABELA ── */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.admin-table th {
+  text-align: left;
+  padding: 10px 14px;
+  background: var(--bg);
+  color: var(--texto2);
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid var(--borda);
+}
+
+.admin-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #f0f4ff;
+  vertical-align: middle;
+}
+
+.admin-table tr:last-child td { border-bottom: none; }
+.admin-table tr:hover td { background: #fafbff; }
+
+/* ── AVATAR ── */
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--azul);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.corretor-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ── FORMULÁRIO ── */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--texto2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  padding: 9px 12px;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-family: 'Barlow', sans-serif;
+  color: var(--texto);
+  background: #fff;
+  transition: border-color 0.15s;
+  outline: none;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--azul);
+  box-shadow: 0 0 0 3px rgba(35,102,209,0.1);
+}
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.15s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  animation: slideUp 0.2s cubic-bezier(0.16,1,0.3,1);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-titulo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--texto);
+}
+
+.modal-acoes {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+/* ── FOTO UPLOAD ── */
+.foto-upload-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.foto-preview {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--borda);
+  background: var(--bg2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.foto-preview img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ── STATUS BADGE ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.badge-ativo { background: #e8f8ee; color: #22a845; }
+.badge-pendente { background: #fff8e8; color: #d97706; }
+.badge-encerrado { background: #f0f0f0; color: #666; }
+.badge-recusado { background: #fee8e8; color: var(--vermelho); }
+
+/* ── TOAST ── */
+.toast-wrap {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toast {
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  animation: slideInRight 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(40px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.toast-success { background: var(--verde); }
+.toast-error { background: var(--vermelho); }
+.toast-info { background: var(--azul); }
+
+/* ── VAZIO ── */
+.admin-vazio {
+  text-align: center;
+  padding: 40px;
+  color: var(--texto2);
+}
+
+.admin-vazio-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.admin-vazio p { font-size: 0.9rem; }
+
+/* ── RANKING MINI ── */
+.ranking-mini-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--bg2);
+}
+
+.ranking-mini-item:last-child { border-bottom: none; }
+
+.ranking-pos {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  color: var(--texto2);
+  width: 28px;
+  text-align: center;
+}
+
+.ranking-pos.ouro { color: #f4b942; }
+.ranking-pos.prata { color: #9ba8b5; }
+.ranking-pos.bronze { color: #cd7f32; }
+
+.ranking-mini-nome {
+  flex: 1;
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.ranking-mini-valor {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  color: var(--azul);
+  letter-spacing: 0.03em;
+}
+
+/* ── DUELO CARD ── */
+.duelo-card {
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  background: #fafbff;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.duelo-vs {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  color: var(--vermelho);
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.duelo-info { flex: 1; }
+.duelo-nomes {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--texto);
+  margin-bottom: 4px;
+}
+
+.duelo-meta {
+  font-size: 0.78rem;
+  color: var(--texto2);
+}
+
+.duelo-acoes {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* ── CAMPEÃO ── */
+.campeao-card {
+  border: 2px solid var(--amarelo);
+  border-radius: 12px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #fffbe8, #fff8d6);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.campeao-trophy { font-size: 2rem; }
+
+.campeao-info { flex: 1; }
+.campeao-titulo {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #b8860b;
+  margin-bottom: 2px;
+}
+
+.campeao-nome {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+/* ── RESPONSIVO ── */
+@media (max-width: 768px) {
+  .admin-sidebar { width: 200px; }
+  .admin-main { margin-left: 200px; }
+  .admin-content { padding: 16px; }
+}
