@@ -18,13 +18,13 @@ export default function AdminEvento({ eventoAtivo, setEventoAtivo, addToast }) {
     const unsub = ouvirRanking(eventoAtivo.id, setRanking);
     if (eventoAtivo.campeoes) setCampeoes(eventoAtivo.campeoes);
     return unsub;
-  }, [eventoAtivo?.id]);
+  }, [eventoAtivo?.id, eventoAtivo?.campeoes]);
 
   const handleCriarEvento = async () => {
     if (!form.inicio || !form.fim) { addToast('Defina o horário de início e fim.', 'error'); return; }
     setLoading(true);
     try {
-      const id = await criarEvento({ nome: form.nome, data: new Date().toLocaleDateString('pt-BR'), inicio: form.inicio, fim: form.fim });
+      await criarEvento({ nome: form.nome, data: new Date().toLocaleDateString('pt-BR'), inicio: form.inicio, fim: form.fim });
       const novo = await buscarEventoAtivo();
       setEventoAtivo(novo);
       addToast('Evento criado! SEXTOU!!! 🎉');

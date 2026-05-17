@@ -12,7 +12,7 @@ export default function AdminVendas({ eventoAtivo, addToast }) {
   const [form, setForm] = useState({ corretorId: '', vidas: '', valor: '', observacao: '' });
   const [loading, setLoading] = useState(false);
   const [confirmExcluir, setConfirmExcluir] = useState(null);
-  const { perfil } = useAuth();
+  
 
   useEffect(() => {
     if (!eventoAtivo?.id) return;

@@ -18,7 +18,7 @@ export default function CorretorNotificacoes({ perfil, onLidas }) {
       onLidas?.(naoLidas);
     });
     return unsub;
-  }, [perfil.uid]);
+  }, [perfil.uid, onLidas]);
 
   const handleMarcarLida = async (n) => {
     if (n.lida) return;

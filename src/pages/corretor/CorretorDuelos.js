@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { collection, onSnapshot, query, where, orderBy, doc, getDoc } from 'firebase/firestore';
+import { collection, onSnapshot, query, where, orderBy } from 'firebase/firestore';
 import { Timestamp } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { criarDuelo, enviarMensagem, ouvirMensagensDuelo, listarCorretores, buscarEventoAtivo, enviarNotificacao } from '../../firebase/db';

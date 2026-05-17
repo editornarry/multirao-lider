@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { collection, onSnapshot, query, where, orderBy, doc, getDoc } from 'firebase/firestore';
+import { collection, onSnapshot, query, where, orderBy, doc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { ouvirRanking, buscarEventoAtivo } from '../../firebase/db';
 
