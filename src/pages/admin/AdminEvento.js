@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { criarEvento, encerrarEvento, buscarEventoAtivo, listarCorretores, ouvirRanking } from '../../firebase/db';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';

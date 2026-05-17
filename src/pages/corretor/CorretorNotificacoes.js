@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ouvirNotificacoes, marcarNotificacaoLida } from '../../firebase/db';
 
 const ICONS = {
