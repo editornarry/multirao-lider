@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { collection, onSnapshot, query, where, orderBy } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { registrarVenda, editarVenda, excluirVenda, listarCorretores } from '../../firebase/db';
-import { useAuth } from '../../contexts/AuthContext';
+
 
 export default function AdminVendas({ eventoAtivo, addToast }) {
   const [vendas, setVendas] = useState([]);
@@ -37,7 +37,7 @@ export default function AdminVendas({ eventoAtivo, addToast }) {
   };
 
   const handleSalvar = async () => {
-    if (!form.corretorId || !form.vidas || !form.valor) { addToast('Preencha todos os campos obrigatórios.', 'error'); return; }
+    if (!form.corretorId || !form.vidas || !form.valor) { addToast('Preencha todos os campos obrigatÃ³rios.', 'error'); return; }
     setLoading(true);
     try {
       const corretor = corretores.find(c => c.uid === form.corretorId);
@@ -69,7 +69,7 @@ export default function AdminVendas({ eventoAtivo, addToast }) {
   const handleExcluir = async (id) => {
     try {
       await excluirVenda(id);
-      addToast('Venda excluída.');
+      addToast('Venda excluÃ­da.');
       setConfirmExcluir(null);
     } catch { addToast('Erro ao excluir.', 'error'); }
   };
@@ -78,7 +78,7 @@ export default function AdminVendas({ eventoAtivo, addToast }) {
     <div className="admin-secao">
       <div className="admin-secao-body">
         <div className="admin-vazio">
-          <div className="admin-vazio-icon">📋</div>
+          <div className="admin-vazio-icon">ðŸ“‹</div>
           <p>Nenhum evento ativo. Crie um evento primeiro na aba Evento.</p>
         </div>
       </div>
@@ -89,13 +89,13 @@ export default function AdminVendas({ eventoAtivo, addToast }) {
     <div>
       <div className="admin-secao">
         <div className="admin-secao-header">
-          <span className="admin-secao-titulo">📋 Vendas do Evento ({vendas.length})</span>
+          <span className="admin-secao-titulo">ðŸ“‹ Vendas do Evento ({vendas.length})</span>
           <button className="btn btn-primary" onClick={abrirCriar}>+ Registrar Venda</button>
         </div>
         <div className="admin-secao-body" style={{ padding: 0 }}>
           {vendas.length === 0 ? (
             <div className="admin-vazio">
-              <div className="admin-vazio-icon">📝</div>
+              <div className="admin-vazio-icon">ðŸ“</div>
               <p>Nenhuma venda registrada ainda.</p>
             </div>
           ) : (
@@ -105,9 +105,9 @@ export default function AdminVendas({ eventoAtivo, addToast }) {
                   <th>Corretor</th>
                   <th>Vidas</th>
                   <th>Valor</th>
-                  <th>Observação</th>
-                  <th>Horário</th>
-                  <th>Ações</th>
+                  <th>ObservaÃ§Ã£o</th>
+                  <th>HorÃ¡rio</th>
+                  <th>AÃ§Ãµes</th>
                 </tr>
               </thead>
               <tbody>
@@ -116,20 +116,20 @@ export default function AdminVendas({ eventoAtivo, addToast }) {
                     <td style={{ fontWeight: 600 }}>{v.corretorNome}</td>
                     <td>
                       <span style={{ background: '#eef3ff', color: '#2366d1', padding: '3px 10px', borderRadius: 20, fontWeight: 700, fontSize: '0.82rem' }}>
-                        🫀 {v.vidas}
+                        ðŸ«€ {v.vidas}
                       </span>
                     </td>
                     <td style={{ fontWeight: 700, color: '#2dc653' }}>
                       {Number(v.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                     </td>
-                    <td style={{ color: '#4a5568', fontSize: '0.82rem' }}>{v.observacao || '—'}</td>
+                    <td style={{ color: '#4a5568', fontSize: '0.82rem' }}>{v.observacao || 'â€”'}</td>
                     <td style={{ fontSize: '0.78rem', color: '#888' }}>
-                      {v.criadoEm?.toDate?.().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) || '—'}
+                      {v.criadoEm?.toDate?.().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) || 'â€”'}
                     </td>
                     <td>
                       <div style={{ display: 'flex', gap: 6 }}>
-                        <button className="btn btn-ghost btn-sm" onClick={() => abrirEditar(v)}>✏️</button>
-                        <button className="btn btn-danger btn-sm" onClick={() => setConfirmExcluir(v)}>🗑️</button>
+                        <button className="btn btn-ghost btn-sm" onClick={() => abrirEditar(v)}>âœï¸</button>
+                        <button className="btn btn-danger btn-sm" onClick={() => setConfirmExcluir(v)}>ðŸ—‘ï¸</button>
                       </div>
                     </td>
                   </tr>
@@ -143,7 +143,7 @@ export default function AdminVendas({ eventoAtivo, addToast }) {
       {modalAberto && (
         <div className="modal-overlay" onClick={() => setModalAberto(false)}>
           <div className="modal" onClick={e => e.stopPropagation()}>
-            <div className="modal-titulo">{editando ? '✏️ Editar Venda' : '➕ Registrar Venda'}</div>
+            <div className="modal-titulo">{editando ? 'âœï¸ Editar Venda' : 'âž• Registrar Venda'}</div>
             <div className="form-grid">
               <div className="form-field" style={{ gridColumn: '1/-1' }}>
                 <label>Corretor *</label>
@@ -153,7 +153,7 @@ export default function AdminVendas({ eventoAtivo, addToast }) {
                 </select>
               </div>
               <div className="form-field">
-                <label>Nº de Vidas *</label>
+                <label>NÂº de Vidas *</label>
                 <input type="number" min="1" value={form.vidas} onChange={e => setForm(f => ({ ...f, vidas: e.target.value }))} placeholder="Ex: 3" />
               </div>
               <div className="form-field">
@@ -161,7 +161,7 @@ export default function AdminVendas({ eventoAtivo, addToast }) {
                 <input type="number" min="0" step="0.01" value={form.valor} onChange={e => setForm(f => ({ ...f, valor: e.target.value }))} placeholder="Ex: 850.00" />
               </div>
               <div className="form-field" style={{ gridColumn: '1/-1' }}>
-                <label>Observação</label>
+                <label>ObservaÃ§Ã£o</label>
                 <input value={form.observacao} onChange={e => setForm(f => ({ ...f, observacao: e.target.value }))} placeholder="Opcional..." />
               </div>
             </div>
@@ -178,9 +178,9 @@ export default function AdminVendas({ eventoAtivo, addToast }) {
       {confirmExcluir && (
         <div className="modal-overlay" onClick={() => setConfirmExcluir(null)}>
           <div className="modal" style={{ maxWidth: 360 }} onClick={e => e.stopPropagation()}>
-            <div className="modal-titulo">🗑️ Confirmar exclusão</div>
+            <div className="modal-titulo">ðŸ—‘ï¸ Confirmar exclusÃ£o</div>
             <p style={{ color: '#4a5568', fontSize: '0.9rem' }}>
-              Excluir a venda de <strong>{confirmExcluir.corretorNome}</strong> ({confirmExcluir.vidas} vidas — {Number(confirmExcluir.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })})?
+              Excluir a venda de <strong>{confirmExcluir.corretorNome}</strong> ({confirmExcluir.vidas} vidas â€” {Number(confirmExcluir.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })})?
             </p>
             <div className="modal-acoes">
               <button className="btn btn-ghost" onClick={() => setConfirmExcluir(null)}>Cancelar</button>
@@ -192,3 +192,4 @@ export default function AdminVendas({ eventoAtivo, addToast }) {
     </div>
   );
 }
+

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { collection, onSnapshot, query, where, orderBy } from 'firebase/firestore';
 import { Timestamp } from 'firebase/firestore';
 import { db } from '../../firebase/config';
@@ -20,7 +20,7 @@ function ContadorRegressivo({ prazo }) {
     const interval = setInterval(tick, 1000);
     return () => clearInterval(interval);
   }, [prazo]);
-  return <span style={{ fontFamily: 'Bebas Neue', color: 'var(--vermelho)', fontSize: '1rem', letterSpacing: '0.05em' }}>⏱ {restante}</span>;
+  return <span style={{ fontFamily: 'Bebas Neue', color: 'var(--vermelho)', fontSize: '1rem', letterSpacing: '0.05em' }}>â± {restante}</span>;
 }
 
 function ChatDuelo({ dueloId, perfil }) {
@@ -46,11 +46,11 @@ function ChatDuelo({ dueloId, perfil }) {
   return (
     <div style={{ marginTop: 12, borderTop: '1px solid var(--borda)', paddingTop: 12 }}>
       <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--texto2)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 8 }}>
-        🔥 Provocações ao vivo
+        ðŸ”¥ ProvocaÃ§Ãµes ao vivo
       </div>
       <div style={{ maxHeight: 140, overflowY: 'auto', marginBottom: 10, display: 'flex', flexDirection: 'column', gap: 6 }}>
         {mensagens.length === 0
-          ? <p style={{ fontSize: '0.78rem', color: 'var(--texto2)', textAlign: 'center', padding: '8px 0' }}>Nenhuma provocação ainda... 😴</p>
+          ? <p style={{ fontSize: '0.78rem', color: 'var(--texto2)', textAlign: 'center', padding: '8px 0' }}>Nenhuma provocaÃ§Ã£o ainda... ðŸ˜´</p>
           : mensagens.map(m => (
             <div key={m.id} style={{
               background: m.autorId === perfil.uid ? 'var(--azul-bg)' : '#fff',
@@ -72,7 +72,7 @@ function ChatDuelo({ dueloId, perfil }) {
           value={texto}
           onChange={e => setTexto(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && handleEnviar()}
-          placeholder="Manda uma provocação... 😈"
+          placeholder="Manda uma provocaÃ§Ã£o... ðŸ˜ˆ"
           style={{
             flex: 1, padding: '9px 12px', border: '1px solid var(--borda)',
             borderRadius: 10, fontSize: '0.85rem', fontFamily: 'Barlow, sans-serif', outline: 'none'
@@ -80,7 +80,7 @@ function ChatDuelo({ dueloId, perfil }) {
           maxLength={120}
         />
         <button className="btn btn-danger btn-sm" onClick={handleEnviar} disabled={loading || !texto.trim()}>
-          🔥
+          ðŸ”¥
         </button>
       </div>
     </div>
@@ -134,11 +134,11 @@ export default function CorretorDuelos({ perfil, addToast }) {
       });
       await enviarNotificacao(adversario.uid, {
         tipo: 'duelo_proposto',
-        titulo: '⚔️ Você foi desafiado!',
-        corpo: `${perfil.nome} quer duelar com você! Meta: ${form.tipo === 'vidas' ? form.meta + ' vidas' : 'R$ ' + form.meta}`,
+        titulo: 'âš”ï¸ VocÃª foi desafiado!',
+        corpo: `${perfil.nome} quer duelar com vocÃª! Meta: ${form.tipo === 'vidas' ? form.meta + ' vidas' : 'R$ ' + form.meta}`,
         dueloId
       });
-      addToast('Duelo proposto! Aguarde o admin aprovar. 🥊');
+      addToast('Duelo proposto! Aguarde o admin aprovar. ðŸ¥Š');
       setModalPropor(false);
       setForm({ desafiadoId: '', tipo: 'vidas', meta: '', usarPrazo: 'hora', prazoHora: '', duracaoMinutos: '' });
     } catch (err) { addToast('Erro ao propor duelo: ' + err.message, 'error'); }
@@ -153,17 +153,17 @@ export default function CorretorDuelos({ perfil, addToast }) {
 
   return (
     <div>
-      {/* Botão propor */}
+      {/* BotÃ£o propor */}
       {eventoAtivo && (
         <button className="btn btn-danger btn-lg btn-block" style={{ marginBottom: 14 }} onClick={() => setModalPropor(true)}>
-          ⚔️ Propor Duelo
+          âš”ï¸ Propor Duelo
         </button>
       )}
 
       {/* Ativos */}
       {ativos.length > 0 && (
         <>
-          <div className="secao-titulo">🔥 Duelos Ativos</div>
+          <div className="secao-titulo">ðŸ”¥ Duelos Ativos</div>
           {ativos.map(d => (
             <div key={d.id} className="duelo-card ativo">
               <div className="duelo-adversario">
@@ -172,7 +172,7 @@ export default function CorretorDuelos({ perfil, addToast }) {
                   <div className="duelo-nome">{adversario(d).nome}</div>
                   <div className="duelo-meta">
                     Meta: {d.tipo === 'vidas' ? `${d.meta} vidas` : Number(d.meta).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-                    {d.prazo && <> · <ContadorRegressivo prazo={d.prazo} /></>}
+                    {d.prazo && <> Â· <ContadorRegressivo prazo={d.prazo} /></>}
                   </div>
                 </div>
               </div>
@@ -185,7 +185,7 @@ export default function CorretorDuelos({ perfil, addToast }) {
       {/* Pendentes */}
       {pendentes.length > 0 && (
         <>
-          <div className="secao-titulo">⏳ Aguardando Aprovação</div>
+          <div className="secao-titulo">â³ Aguardando AprovaÃ§Ã£o</div>
           {pendentes.map(d => (
             <div key={d.id} className="duelo-card">
               <div className="duelo-adversario">
@@ -197,7 +197,7 @@ export default function CorretorDuelos({ perfil, addToast }) {
                   </div>
                 </div>
               </div>
-              <span className="tag tag-laranja" style={{ marginTop: 4 }}>⏳ Aguardando admin</span>
+              <span className="tag tag-laranja" style={{ marginTop: 4 }}>â³ Aguardando admin</span>
             </div>
           ))}
         </>
@@ -206,22 +206,22 @@ export default function CorretorDuelos({ perfil, addToast }) {
       {/* Sem duelos */}
       {ativos.length === 0 && pendentes.length === 0 && (
         <div className="c-card" style={{ textAlign: 'center', padding: '32px 20px' }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: 10 }}>⚔️</div>
-          <p style={{ color: 'var(--texto2)', fontSize: '0.9rem' }}>Nenhum duelo ativo.<br />Desafie alguém e esquenta a sala! 🔥</p>
+          <div style={{ fontSize: '2.5rem', marginBottom: 10 }}>âš”ï¸</div>
+          <p style={{ color: 'var(--texto2)', fontSize: '0.9rem' }}>Nenhum duelo ativo.<br />Desafie alguÃ©m e esquenta a sala! ðŸ”¥</p>
         </div>
       )}
 
-      {/* Histórico */}
+      {/* HistÃ³rico */}
       {historico.length > 0 && (
         <>
-          <div className="secao-titulo" style={{ marginTop: 8 }}>📜 Histórico</div>
+          <div className="secao-titulo" style={{ marginTop: 8 }}>ðŸ“œ HistÃ³rico</div>
           {historico.map(d => {
             const venceu = d.vencedor === perfil.uid;
             const adv = adversario(d);
             return (
               <div key={d.id} className="duelo-card" style={{ opacity: 0.85 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <span style={{ fontSize: '1.4rem' }}>{d.status === 'recusado' ? '❌' : venceu ? '🏆' : '💀'}</span>
+                  <span style={{ fontSize: '1.4rem' }}>{d.status === 'recusado' ? 'âŒ' : venceu ? 'ðŸ†' : 'ðŸ’€'}</span>
                   <div style={{ flex: 1 }}>
                     <div className="duelo-nome">vs {adv.nome}</div>
                     <div className="duelo-meta">
@@ -229,7 +229,7 @@ export default function CorretorDuelos({ perfil, addToast }) {
                     </div>
                   </div>
                   <span className={`tag ${d.status === 'recusado' ? 'tag-vermelho' : venceu ? 'tag-verde' : 'tag-laranja'}`}>
-                    {d.status === 'recusado' ? 'Recusado' : venceu ? 'Vitória!' : 'Derrota'}
+                    {d.status === 'recusado' ? 'Recusado' : venceu ? 'VitÃ³ria!' : 'Derrota'}
                   </span>
                 </div>
               </div>
@@ -243,12 +243,12 @@ export default function CorretorDuelos({ perfil, addToast }) {
         <div className="modal-overlay" onClick={() => setModalPropor(false)}>
           <div className="modal" onClick={e => e.stopPropagation()}>
             <div className="modal-handle" />
-            <div className="modal-titulo">⚔️ Propor Duelo</div>
+            <div className="modal-titulo">âš”ï¸ Propor Duelo</div>
 
             <div className="form-field">
               <label>Desafiar quem?</label>
               <select value={form.desafiadoId} onChange={e => setForm(f => ({ ...f, desafiadoId: e.target.value }))}>
-                <option value="">Escolha o adversário...</option>
+                <option value="">Escolha o adversÃ¡rio...</option>
                 {corretores.map(c => <option key={c.uid} value={c.uid}>{c.nome}</option>)}
               </select>
             </div>
@@ -256,13 +256,13 @@ export default function CorretorDuelos({ perfil, addToast }) {
             <div className="form-field">
               <label>Tipo de Meta</label>
               <select value={form.tipo} onChange={e => setForm(f => ({ ...f, tipo: e.target.value }))}>
-                <option value="vidas">🫀 Vidas</option>
-                <option value="valor">💰 Valor R$</option>
+                <option value="vidas">ðŸ«€ Vidas</option>
+                <option value="valor">ðŸ’° Valor R$</option>
               </select>
             </div>
 
             <div className="form-field">
-              <label>Meta ({form.tipo === 'vidas' ? 'nº de vidas' : 'R$'})</label>
+              <label>Meta ({form.tipo === 'vidas' ? 'nÂº de vidas' : 'R$'})</label>
               <input type="number" value={form.meta} onChange={e => setForm(f => ({ ...f, meta: e.target.value }))}
                 placeholder={form.tipo === 'vidas' ? 'Ex: 5' : 'Ex: 1500'} inputMode="numeric" />
             </div>
@@ -271,8 +271,8 @@ export default function CorretorDuelos({ perfil, addToast }) {
               <label>Prazo</label>
               <div style={{ display: 'flex', gap: 8 }}>
                 <select value={form.usarPrazo} onChange={e => setForm(f => ({ ...f, usarPrazo: e.target.value }))} style={{ flex: 1 }}>
-                  <option value="hora">Até horário</option>
-                  <option value="duracao">Duração (min)</option>
+                  <option value="hora">AtÃ© horÃ¡rio</option>
+                  <option value="duracao">DuraÃ§Ã£o (min)</option>
                 </select>
                 {form.usarPrazo === 'hora'
                   ? <input type="time" value={form.prazoHora} onChange={e => setForm(f => ({ ...f, prazoHora: e.target.value }))} style={{ flex: 1 }} />
@@ -284,7 +284,7 @@ export default function CorretorDuelos({ perfil, addToast }) {
             <div className="modal-acoes">
               <button className="btn btn-ghost" style={{ flex: 1 }} onClick={() => setModalPropor(false)}>Cancelar</button>
               <button className="btn btn-danger" style={{ flex: 2 }} onClick={handlePropor} disabled={loading}>
-                {loading ? 'Enviando...' : '⚔️ Desafiar!'}
+                {loading ? 'Enviando...' : 'âš”ï¸ Desafiar!'}
               </button>
             </div>
           </div>
@@ -293,3 +293,4 @@ export default function CorretorDuelos({ perfil, addToast }) {
     </div>
   );
 }
+

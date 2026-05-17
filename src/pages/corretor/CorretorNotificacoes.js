@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { ouvirNotificacoes, marcarNotificacaoLida } from '../../firebase/db';
 
 const ICONS = {
-  duelo_proposto: '⚔️',
-  duelo_aprovado: '✅',
-  duelo_recusado: '❌',
-  duelo_encerrado: '🏁',
+  duelo_proposto: 'âš”ï¸',
+  duelo_aprovado: 'âœ…',
+  duelo_recusado: 'âŒ',
+  duelo_encerrado: 'ðŸ',
 };
 
 export default function CorretorNotificacoes({ perfil, onLidas }) {
@@ -36,7 +36,7 @@ export default function CorretorNotificacoes({ perfil, onLidas }) {
     <div>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
         <div className="secao-titulo" style={{ marginBottom: 0 }}>
-          🔔 Notificações
+          ðŸ”” NotificaÃ§Ãµes
           {naoLidas > 0 && (
             <span style={{ background: 'var(--vermelho)', color: '#fff', fontSize: '0.65rem', fontWeight: 700, padding: '2px 8px', borderRadius: 20, marginLeft: 8 }}>
               {naoLidas} nova{naoLidas > 1 ? 's' : ''}
@@ -45,7 +45,7 @@ export default function CorretorNotificacoes({ perfil, onLidas }) {
         </div>
         {naoLidas > 0 && (
           <button className="btn btn-ghost btn-sm" onClick={handleMarcarTodas}>
-            ✓ Marcar todas
+            âœ“ Marcar todas
           </button>
         )}
       </div>
@@ -53,8 +53,8 @@ export default function CorretorNotificacoes({ perfil, onLidas }) {
       <div className="c-card">
         {notifs.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '32px 0', color: 'var(--texto2)' }}>
-            <div style={{ fontSize: '2.5rem', marginBottom: 10 }}>🔕</div>
-            <p style={{ fontSize: '0.88rem' }}>Nenhuma notificação ainda.</p>
+            <div style={{ fontSize: '2.5rem', marginBottom: 10 }}>ðŸ”•</div>
+            <p style={{ fontSize: '0.88rem' }}>Nenhuma notificaÃ§Ã£o ainda.</p>
           </div>
         ) : (
           notifs.map(n => (
@@ -64,7 +64,7 @@ export default function CorretorNotificacoes({ perfil, onLidas }) {
               onClick={() => handleMarcarLida(n)}
               style={{ cursor: n.lida ? 'default' : 'pointer' }}
             >
-              <div className="notif-icone">{ICONS[n.tipo] || '🔔'}</div>
+              <div className="notif-icone">{ICONS[n.tipo] || 'ðŸ””'}</div>
               <div style={{ flex: 1 }}>
                 <div className="notif-titulo">{n.titulo}</div>
                 <div className="notif-corpo">{n.corpo}</div>
@@ -72,8 +72,8 @@ export default function CorretorNotificacoes({ perfil, onLidas }) {
                   {n.criadoEm?.toDate?.().toLocaleString('pt-BR', {
                     day: '2-digit', month: '2-digit',
                     hour: '2-digit', minute: '2-digit'
-                  }) || '—'}
-                  {!n.lida && <span style={{ color: 'var(--azul)', fontWeight: 700, marginLeft: 6 }}>● novo</span>}
+                  }) || 'â€”'}
+                  {!n.lida && <span style={{ color: 'var(--azul)', fontWeight: 700, marginLeft: 6 }}>â— novo</span>}
                 </div>
               </div>
             </div>
@@ -83,3 +83,4 @@ export default function CorretorNotificacoes({ perfil, onLidas }) {
     </div>
   );
 }
+

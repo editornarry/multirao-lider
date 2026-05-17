@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { ouvirRanking, ouvirDuelosAtivos } from '../../firebase/db';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db } from '../../firebase/config';
@@ -27,29 +27,29 @@ export default function AdminDashboard({ eventoAtivo }) {
       {/* Cards de resumo */}
       <div className="admin-cards-grid">
         <div className="admin-card">
-          <div className="admin-card-icon">📋</div>
+          <div className="admin-card-icon">ðŸ“‹</div>
           <div className="admin-card-valor">{totalVendas}</div>
           <div className="admin-card-label">Vendas Registradas</div>
         </div>
         <div className="admin-card">
-          <div className="admin-card-icon">🫀</div>
+          <div className="admin-card-icon">ðŸ«€</div>
           <div className="admin-card-valor">{totalVidas}</div>
           <div className="admin-card-label">Total de Vidas</div>
         </div>
         <div className="admin-card">
-          <div className="admin-card-icon">💰</div>
+          <div className="admin-card-icon">ðŸ’°</div>
           <div className="admin-card-valor">
             {totalValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 })}
           </div>
           <div className="admin-card-label">Total em Valor</div>
         </div>
         <div className="admin-card">
-          <div className="admin-card-icon">⚔️</div>
+          <div className="admin-card-icon">âš”ï¸</div>
           <div className="admin-card-valor">{duelosAtivos.length}</div>
           <div className="admin-card-label">Duelos Ativos</div>
         </div>
         <div className="admin-card">
-          <div className="admin-card-icon">👥</div>
+          <div className="admin-card-icon">ðŸ‘¥</div>
           <div className="admin-card-valor">{ranking.porVidas.length}</div>
           <div className="admin-card-label">Corretores Ativos</div>
         </div>
@@ -59,7 +59,7 @@ export default function AdminDashboard({ eventoAtivo }) {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 24 }}>
         <div className="admin-secao">
           <div className="admin-secao-header">
-            <span className="admin-secao-titulo">🫀 Ranking — Vidas</span>
+            <span className="admin-secao-titulo">ðŸ«€ Ranking â€” Vidas</span>
           </div>
           <div className="admin-secao-body">
             {ranking.porVidas.length === 0 ? (
@@ -68,7 +68,7 @@ export default function AdminDashboard({ eventoAtivo }) {
               ranking.porVidas.slice(0, 5).map((c, i) => (
                 <div key={c.corretorId} className="ranking-mini-item">
                   <span className={`ranking-pos ${i === 0 ? 'ouro' : i === 1 ? 'prata' : i === 2 ? 'bronze' : ''}`}>
-                    {i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1}
+                    {i === 0 ? 'ðŸ¥‡' : i === 1 ? 'ðŸ¥ˆ' : i === 2 ? 'ðŸ¥‰' : i + 1}
                   </span>
                   <span className="ranking-mini-nome">{c.corretorNome}</span>
                   <span className="ranking-mini-valor">{c.totalVidas} vidas</span>
@@ -80,7 +80,7 @@ export default function AdminDashboard({ eventoAtivo }) {
 
         <div className="admin-secao">
           <div className="admin-secao-header">
-            <span className="admin-secao-titulo">💰 Ranking — Valor</span>
+            <span className="admin-secao-titulo">ðŸ’° Ranking â€” Valor</span>
           </div>
           <div className="admin-secao-body">
             {ranking.porValor.length === 0 ? (
@@ -89,7 +89,7 @@ export default function AdminDashboard({ eventoAtivo }) {
               ranking.porValor.slice(0, 5).map((c, i) => (
                 <div key={c.corretorId} className="ranking-mini-item">
                   <span className={`ranking-pos ${i === 0 ? 'ouro' : i === 1 ? 'prata' : i === 2 ? 'bronze' : ''}`}>
-                    {i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1}
+                    {i === 0 ? 'ðŸ¥‡' : i === 1 ? 'ðŸ¥ˆ' : i === 2 ? 'ðŸ¥‰' : i + 1}
                   </span>
                   <span className="ranking-mini-nome">{c.corretorNome}</span>
                   <span className="ranking-mini-valor">
@@ -106,20 +106,20 @@ export default function AdminDashboard({ eventoAtivo }) {
       {duelosAtivos.length > 0 && (
         <div className="admin-secao">
           <div className="admin-secao-header">
-            <span className="admin-secao-titulo">⚔️ Duelos em Andamento</span>
+            <span className="admin-secao-titulo">âš”ï¸ Duelos em Andamento</span>
           </div>
           <div className="admin-secao-body">
             {duelosAtivos.map(d => (
               <div key={d.id} className="duelo-card">
                 <span className="duelo-vs">VS</span>
                 <div className="duelo-info">
-                  <div className="duelo-nomes">{d.desafiante.nome} × {d.desafiado.nome}</div>
+                  <div className="duelo-nomes">{d.desafiante.nome} Ã— {d.desafiado.nome}</div>
                   <div className="duelo-meta">
                     Meta: {d.tipo === 'vidas' ? `${d.meta} vidas` : d.meta.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-                    {d.prazo && ` até ${new Date(d.prazo.toDate()).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`}
+                    {d.prazo && ` atÃ© ${new Date(d.prazo.toDate()).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`}
                   </div>
                 </div>
-                <span className="badge badge-ativo">● AO VIVO</span>
+                <span className="badge badge-ativo">â— AO VIVO</span>
               </div>
             ))}
           </div>
@@ -128,3 +128,4 @@ export default function AdminDashboard({ eventoAtivo }) {
     </div>
   );
 }
+
