@@ -43,7 +43,6 @@ export default function AdminPage() {
   return (
     <div className="admin-root">
       <ToastContainer toasts={toasts} />
-
       <aside className="admin-sidebar">
         <div className="admin-sidebar-logo">
           <img src={logo} alt="Líder Corretora" />
@@ -52,7 +51,6 @@ export default function AdminPage() {
             <span>SEXTOU!!!</span>
           </div>
         </div>
-
         <nav className="admin-nav">
           {ABAS.map(aba => (
             <button
@@ -68,7 +66,6 @@ export default function AdminPage() {
             </button>
           ))}
         </nav>
-
         <div className="admin-sidebar-footer">
           <div className="admin-user-info">
             <div className="admin-user-avatar">{inicialNome}</div>
@@ -82,7 +79,6 @@ export default function AdminPage() {
           </button>
         </div>
       </aside>
-
       <main className="admin-main">
         <div className="admin-topbar">
           <span className="admin-topbar-title">
@@ -95,7 +91,6 @@ export default function AdminPage() {
             </div>
           </div>
         </div>
-
         <div className="admin-content">
           {abaAtiva === 'dashboard' && <AdminDashboard eventoAtivo={eventoAtivo} />}
           {abaAtiva === 'corretores' && <AdminCorretores addToast={addToast} />}
@@ -107,6 +102,3 @@ export default function AdminPage() {
     </div>
   );
 }
-
-'@ -Encoding UTF8
-Write-Host 'AdminPage.js reescrito com sucesso!'
