@@ -1,3 +1,4 @@
+Set-Content -Path 'src/pages/admin/AdminPage.js' -Value @'
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
@@ -107,3 +108,6 @@ export default function AdminPage() {
     </div>
   );
 }
+
+'@ -Encoding UTF8
+Write-Host 'AdminPage.js reescrito com sucesso!'
